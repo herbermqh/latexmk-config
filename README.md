@@ -83,7 +83,7 @@ make view | Build pdf and show it with evince |
 
 `git clone https://github.com/herbermqh/latexmk-config.git`
 
-2. Crear un symlink en el directorio `$HOME/`
+2. Crear un symlink de `.latexmkrc` en el directorio `$HOME/`
 
 
 
