@@ -63,12 +63,13 @@ sub ai2eps {
 
 add_cus_dep('asy', 'eps', 0, 'asy2eps');
 sub asy2eps {
-	return system("asy -f eps -o \"$_[0].eps\" \"$_[0].asy\"");
+	return system("asy -f eps -o files_asymptote/ '$_[0]'");
 }
+
 
 add_cus_dep('asy', 'pdf', 0, 'asy2pdf');
 sub asy2pdf {
-	return system("asy -o filesasymptote/ '$_[0]'");
+	return system("asy -f pdf -o files_asymptote/ '$_[0]'");
 }
 
 add_cus_dep('dia', 'eps', 0, 'dia2eps');
