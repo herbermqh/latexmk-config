@@ -9,7 +9,7 @@ $cleanup_includes_generated = 1;
 $pdf_previewer = "okular";
 #use recorder feature to list input files
 $recorder = 1;
-$pdf_mode = 1;
+$pdf_mode = 5;
 
 #config for circuit macros
 #path to circuit macros
@@ -29,8 +29,15 @@ $gnuplot_size_y = "6cm";
 use File::Basename;
 
 $pdflatex = 'pdflatex --shell-escape -interaction=nonstopmode -synctex=1 %O %S';
-$xelatex = 'xelatex-dev --shell-escape -interaction=nonstopmode -synctex=1 %O %S';
+$xelatex = 'xelatex-dev --shell-escape -recorder -interaction=nonstopmode -synctex=1 %O %S';
 $latex = 'latex --shell-escape -interaction=nonstopmode -synctex=1 %O %S';
+
+$compiling_cmd = "xdotool search --name \"%D\" " .
+                   "set_window --name \"%D compiling...\"";
+  $success_cmd   = "xdotool search --name \"%D\" " .
+                   "set_window --name \"%D OK\"";
+  $failure_cmd   = "xdotool search --name \"%D\" " .
+                   "set_window --name \"%D FAILURE\"";
 
 #add synctex extensions so they are cleaned
 push @generated_exts, 'synctex', 'synctex.gz';
