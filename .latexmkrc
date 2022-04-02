@@ -29,7 +29,7 @@ $gnuplot_size_y = "6cm";
 use File::Basename;
 
 $pdflatex = 'pdflatex --shell-escape -interaction=nonstopmode -synctex=1 %O %S';
-$xelatex = 'xelatex-dev --shell-escape -recorder -interaction=nonstopmode -synctex=1 %O %S';
+$xelatex = 'xelatex-dev --shell-escape -recorder -interaction=nonstopmode -synctex=1 %S';
 $latex = 'latex --shell-escape -interaction=nonstopmode -synctex=1 %O %S';
 
 $compiling_cmd = "xdotool search --name \"%D\" " .
