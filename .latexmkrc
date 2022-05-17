@@ -28,9 +28,9 @@ $gnuplot_size_y = "6cm";
 
 use File::Basename;
 
-$pdflatex = 'pdflatex --shell-escape -interaction=nonstopmode -synctex=1 %O %S';
-$xelatex = 'xelatex-dev --shell-escape -recorder -interaction=nonstopmode -synctex=1 %S';
-$latex = 'latex --shell-escape -interaction=nonstopmode -synctex=1 %O %S';
+$pdflatex = 'pdflatex --shell-escape -interaction=batchmode -synctex=1 %O %S';
+$xelatex = 'xelatex-dev --shell-escape -recorder -interaction=batchmode -synctex=1 %S';
+$latex = 'latex --shell-escape -interaction=batchmode -synctex=1 %O %S';
 
 $compiling_cmd = "xdotool search --name \"%D\" " .
                    "set_window --name \"%D compiling...\"";
