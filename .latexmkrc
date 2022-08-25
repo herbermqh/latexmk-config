@@ -9,7 +9,7 @@ $cleanup_includes_generated = 1;
 $pdf_previewer = "okular";
 #use recorder feature to list input files
 $recorder = 1;
-$pdf_mode = 5;
+$pdf_mode = 0;
 
 #config for circuit macros
 #path to circuit macros
