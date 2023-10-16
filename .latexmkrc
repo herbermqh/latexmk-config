@@ -9,7 +9,10 @@ $cleanup_includes_generated = 1;
 $pdf_previewer = "sumatraPDF";
 #use recorder feature to list input files
 $recorder = 1;
-$pdf_mode = 0;
+$pdf_mode = 5;
+$max_repeat = 5;
+#note: no está definido latexmk_engines por que en el arhicov .latexmkrc se
+#define $pdf_mode=5; 5 para xelatex, 4 para lualatex y 0 para pdflatex.
 
 #config for circuit macros
 #path to circuit macros
@@ -28,8 +31,9 @@ $gnuplot_size_y = "6cm";
 
 use File::Basename;
 
-$pdflatex = 'pdflatex --shell-escape -recorder -reuse-instance -interaction=batchmode -synctex=1 %O %S';
-$xelatex = 'xelatex-dev --shell-escape -recorder -interaction=batchmode -synctex=1 %S';
+$pdflatex = 'time pdflatex --shell-escape -recorder -file-line-error -interaction=batchmode -synctex=1 %O %S';
+$lualatex = 'time lualatex --shell-escape -recorder -file-line-error -interaction=batchmode -synctex=1 %O %S';
+$xelatex = 'xelatex --shell-escape --enable-write18 -recorder -file-line-error -output-directory=build -interaction=batchmode -synctex=1 %O %S';
 $latex = 'latex --shell-escape -interaction=batchmode -synctex=1 %O %S';
 
 $compiling_cmd = "xdotool search --name \"%D\" " .
@@ -237,7 +241,3 @@ sub cleanup1 {
         unlink_or_move( glob( "$name" ) );
     }
 } #END cleanup1
-
-
-
-
