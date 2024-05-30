@@ -14,9 +14,12 @@ $pdf_previewer = "sumatraPDF";
 $recorder = 1;
 $pdf_mode = 5;
 # $do_cd = 1;
-$max_repeat = 5;
+$max_repeat = 6;
 #note: no está definido latexmk_engines por que en el arhicov .latexmkrc se
 #define $pdf_mode=5; 5 para xelatex, 4 para lualatex y 0 para pdflatex.
+
+
+# ensure_path('TEXINPUTS', './/');
 
 #config for circuit macros
 #path to circuit macros
