@@ -14,7 +14,7 @@ $pdf_previewer = "sumatraPDF";
 $recorder = 1;
 $pdf_mode = 5;
 # $do_cd = 1;
-$max_repeat = 6;
+$max_repeat = 7;
 #note: no está definido latexmk_engines por que en el arhicov .latexmkrc se
 #define $pdf_mode=5; 5 para xelatex, 4 para lualatex y 0 para pdflatex.
 
@@ -40,7 +40,7 @@ use File::Basename;
 
 $pdflatex = 'pdflatex --shell-escape -recorder -file-line-error -interaction=batchmode -synctex=1 %O %S';
 $lualatex = 'lualatex --shell-escape -recorder -file-line-error -interaction=batchmode -synctex=1 %O %S';
-$xelatex = 'xelatex --shell-escape --enable-write18 -recorder -file-line-error -interaction=batchmode -synctex=1 %O %S';
+$xelatex = 'xelatex --shell-escape -output-driver="xdvipdfmx -z 0" --enable-write18 -recorder -file-line-error -interaction=batchmode -synctex=1 %O %S';
 $latex = 'latex --shell-escape -interaction=batchmode -synctex=1 %O %S';
 
 $compiling_cmd = "xdotool search --name \"%D\" " .
@@ -268,4 +268,4 @@ sub cleanup1 {
         (my $name = (/%R/ || /[\*\.\?]/) ? $_ : "%R.$_") =~ s/%R/$dir$root_filename/;
         unlink_or_move( glob( "$name" ) );
     }
-} #END cleanup1
+} #END cleanup1--
