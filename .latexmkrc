@@ -43,12 +43,15 @@ $lualatex = 'lualatex --shell-escape -recorder -file-line-error -interaction=bat
 $xelatex = 'xelatex --shell-escape -output-driver="xdvipdfmx -z 0" --enable-write18 -recorder -file-line-error -interaction=batchmode -synctex=1 %O %S';
 $latex = 'latex --shell-escape -interaction=batchmode -synctex=1 %O %S';
 
-$compiling_cmd = "xdotool search --name \"%D\" " .
-                   "set_window --name \"%D COMPILING...\"";
-$success_cmd   = "xdotool search --name \"%D\" " .
-                   "set_window --name \"%D OK\"";
-$failure_cmd   = "xdotool search --name \"%D\" " .
-                   "set_window --name \"%D FAILURE\"";
+if ($^O eq 'linux') {
+  $compiling_cmd = "xdotool search --name \"%D\" set_window --name \"%D COMPILING...\"";
+  $success_cmd   = "xdotool search --name \"%D\" set_window --name \"%D OK\"";
+  $failure_cmd   = "xdotool search --name \"%D\" set_window --name \"%D FAILURE\"";
+} elsif ($^O eq 'MSWin32') {
+  $compiling_cmd = 'Compilando';
+  $success_cmd   = 'Compilación exitosa';
+  $failure_cmd   = 'Error de compilación';
+}
 
 #add synctex extensions so they are cleaned
 $clean_ext = '*.synctex.gz *.synctex(busy) *.table *.bbl *.mw *.pre *.minitoc* *.pgf-plot.gnuplot *.solution *.tocg *.tocmain';
