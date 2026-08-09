@@ -38,6 +38,13 @@ $gnuplot_size_y = "6cm";
 
 use File::Basename;
 
+# Increase TeX memory limits dynamically for large documents using morewrites
+# $ENV{'main_memory'} = '12000000';
+# $ENV{'extra_mem_bot'} = '12000000';
+# $ENV{'extra_mem_top'} = '12000000';
+# $ENV{'font_mem_size'} = '12000000';
+# $ENV{'pool_size'} = '12000000';
+
 $pdflatex = 'pdflatex --shell-escape -recorder -file-line-error -interaction=batchmode -synctex=1 %O %S';
 $lualatex = 'lualatex --shell-escape -recorder -file-line-error -interaction=batchmode -synctex=1 %O %S';
 $xelatex = 'xelatex --shell-escape -output-driver="xdvipdfmx -z 0" --enable-write18 -recorder -file-line-error -interaction=batchmode -synctex=1 %O %S';
@@ -160,7 +167,7 @@ sub gp2eps_tex {
 	open FILE, "$_[0].gp";
 	while ($line=<FILE>){
 		if (my @matches = $line=~/"([[:alnum:]]+\.$extensionRegExp)"/g){
-			#add matches to dependency list			
+			#add matches to dependency list
 			foreach (@matches) {
  				 rdb_ensure_file( $rule, $_ );
 			}
@@ -197,9 +204,9 @@ END
 #END mustn't be indented
 	#strip leading spaces used just for indentation here in code
 	$texfile =~ s/^\s+//gm;
-	open(my $fh, '>', "$_[0].tex"); 
-	print $fh $texfile;	
-	close $fh; 
+	open(my $fh, '>', "$_[0].tex");
+	print $fh $texfile;
+	close $fh;
 	#compile tex to dvi
 	print dirname($_[0]);
 	system("TEXINPUTS=\"${circuit_macros_path}:\$TEXINPUTS:\" latex -output-directory=" . dirname($_[0]) . " \"$_[0].tex\" > /dev/null");
@@ -208,7 +215,7 @@ END
 	#fix bounding box with epstool
 	system("epstool --copy --bbox temp.eps \"$_[0].eps\" > /dev/null");
 	#delete temporary files
-	system("rm -f \"$_[0].dvi\" \"$_[0].log\" \"$_[0].aux\" \"$_[0].tex\" temp.eps"); 
+	system("rm -f \"$_[0].dvi\" \"$_[0].log\" \"$_[0].aux\" \"$_[0].tex\" temp.eps");
 }
 
 add_cus_dep('cir', 'pdf', 0, 'cir2pdf');
@@ -233,14 +240,14 @@ END
 #END mustn't be indented
 	#strip leading spaces used just for indentation here in code
 	$texfile =~ s/^\s+//gm;
-	open(my $fh, '>', "$_[0].tex"); 
-	print $fh $texfile;	
-	close $fh; 
+	open(my $fh, '>', "$_[0].tex");
+	print $fh $texfile;
+	close $fh;
 	#compile tex to directly to pdf
 	print dirname($_[0]);
 	system("TEXINPUTS=\"${circuit_macros_path}:\$TEXINPUTS:\" pdflatex -output-directory=" . dirname($_[0]) . " \"$_[0].tex\" > /dev/null");
 	#delete temporary files
-	system("rm -f \"$_[0].log\" \"$_[0].aux\" \"$_[0].tex\""); 
+	system("rm -f \"$_[0].log\" \"$_[0].aux\" \"$_[0].tex\"");
 }
 
 add_cus_dep('m4','tex',0,'m2tex');
@@ -261,7 +268,7 @@ sub cleanup1 {
     my $dir = ( shift );
 
     # Change extensions to glob patterns
-    foreach (@_) { 
+    foreach (@_) {
         # If specified pattern is pure extension, without period,
         #   wildcard character (?, *) or %R,
         # then prepend it with directory/root_filename and period to
